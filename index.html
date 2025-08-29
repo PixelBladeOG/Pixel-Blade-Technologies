@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Blade Technologies - Elite Algorithmic Solutions</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #dc2626;
+            --bright-yellow: #fbbf24;
+            --deep-purple: #7c3aed;
+            --pure-black: #000000;
+            --dark-black: #0a0a0a;
+            --light-black: #1a1a1a;
+            --gradient-primary: linear-gradient(135deg, #dc2626 0%, #7c3aed 50%, #fbbf24 100%);
+            --gradient-secondary: linear-gradient(135deg, #7c3aed 0%, #dc2626 100%);
+            --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #dc2626 50%, #7c3aed 100%);
+            --text-white: #ffffff;
+            --text-gray: #d1d5db;
+            --shadow-red: 0 25px 50px -12px rgba(220, 38, 38, 0.25);
+            --shadow-purple: 0 25px 50px -12px rgba(124, 58, 237, 0.25);
+            --shadow-yellow: 0 25px 50px -12px rgba(251, 191, 36, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--pure-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-red);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--bright-yellow);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s ease;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.15;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-primary);
+            top: 15%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            top: 45%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-accent);
+            bottom: 20%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        .floating-shape:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-red);
+            top: 70%;
+            right: 35%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Main Container */
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            max-width: 1200px;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .logo {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            width: 150px;
+            height: 6px;
+            background: var(--gradient-accent);
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        /* Services Grid */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .service-card {
+            background: var(--light-black);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(var(--primary-red), var(--deep-purple), var(--bright-yellow), var(--primary-red));
+            opacity: 0;
+            transition: all 0.5s ease;
+            animation: rotate 6s linear infinite;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: var(--light-black);
+            border-radius: 18px;
+            z-index: 1;
+        }
+
+        .service-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-red);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:nth-child(2):hover {
+            box-shadow: var(--shadow-purple);
+        }
+
+        .service-card:nth-child(3):hover {
+            box-shadow: var(--shadow-yellow);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            color: var(--pure-black);
+            font-weight: 900;
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background: var(--gradient-primary);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: var(--gradient-secondary);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: var(--gradient-accent);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotateY(10deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--light-black);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 1s both;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--dark-black);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: var(--dark-black);
+            padding: 0 0.5rem;
+        }
+
+        .form-group input:focus + label,
+        .form-group textarea:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -0.5rem;
+            left: 1rem;
+            font-size: 0.875rem;
+            color: var(--primary-red);
+        }
+
+        .submit-btn {
+            padding: 1.2rem;
+            background: var(--gradient-primary);
+            color: var(--text-white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-red);
+        }
+
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+        }
+
+        .message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                cursor: default;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            .contact {
+                padding: 2rem;
+            }
+
+            .hero {
+                margin-bottom: 3rem;
+            }
+
+            .logo::after {
+                width: 100px;
+                height: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h1 class="logo">Pixel Blade Technologies</h1>
+            <p class="tagline">Elite Algorithmic Solutions for High Net Worth Individuals</p>
+            <p class="description">
+                We specialize in developing sophisticated algorithmic solutions exclusively for discerning HNI clients. 
+                Our cutting-edge algorithms are designed to optimize performance, maximize efficiency, and deliver 
+                exceptional results in complex computational environments.
+            </p>
+        </div>
+
+        <div class="services">
+            <div class="service-card">
+                <div class="service-icon">∆</div>
+                <h3>Quantitative Analysis</h3>
+                <p>Advanced mathematical models and statistical algorithms for portfolio optimization, risk assessment, and market prediction tailored for high-value investments.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">∑</div>
+                <h3>Trading Algorithms</h3>
+                <p>Proprietary algorithmic trading systems designed for sophisticated investors, featuring high-frequency execution and intelligent market analysis.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">∞</div>
+                <h3>Custom AI Solutions</h3>
+                <p>Bespoke artificial intelligence and machine learning algorithms developed exclusively for elite clientele's unique computational requirements.</p>
+            </div>
+        </div>
+
+        <div class="contact">
+            <h2>Exclusive Consultation</h2>
+            <p class="contact-subtitle">Schedule a private consultation to discuss your algorithmic requirements</p>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <input type="text" id="user_name" name="user_name" placeholder=" " required>
+                    <label for="user_name">Full Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="user_email" name="user_email" placeholder=" " required>
+                    <label for="user_email">Email Address</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="company" name="company" placeholder=" ">
+                    <label for="company">Organization / Investment Firm</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                    <label for="message">Algorithmic Requirements</label>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Request Consultation</span>
+                </button>
+                <div id="form-message" class="message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                cursorFollower.style.left = cursorX + 'px';
+                cursorFollower.style.top = cursorY + 'px';
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Cursor hover effects
+            document.querySelectorAll('button, .service-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursorFollower.style.transform = 'scale(2)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorFollower.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // EmailJS Integration (UNCHANGED)
+        (function() {
+            emailjs.init("broFVDMJTYWUdT84E"); // Replace with your actual public key
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const messageDiv = document.getElementById('form-message');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<div class="loading"></div>';
+            messageDiv.className = 'message';
+            messageDiv.textContent = '';
+            
+            // Send email
+            emailjs.sendForm('service_ivzfwta', 'template_wl0csao', this)
+                .then(function() {
+                    showMessage('Thank you for your inquiry. Our team will contact you within 24 hours for an exclusive consultation.', 'success');
+                    document.getElementById('contact-form').reset();
+                }, function(error) {
+                    console.error('EmailJS error:', error);
+                    showMessage('There was an error processing your request. Please contact us directly for immediate assistance.', 'error');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Request Consultation';
+                });
+        });
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('form-message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            
+            // Trigger animation
+            setTimeout(() => {
+                messageDiv.classList.add('show');
+            }, 10);
+            
+            // Hide message after 6 seconds
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 6000);
+        }
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.floating-shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.3 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.05}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
