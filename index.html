@@ -8,12 +8,12 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
   <style>
     :root{
-      --bg:#1a1b26;
-      --card:#24283b;
+      --bg:#0f0f0f;
+      --card:#1a1a1a;
       --muted:#9ca3af;
-      --accent-yellow:#facc15;
-      --accent-purple:#c084fc;
-      --accent-red:#ef4444;
+      --gold:#facc15;
+      --purple:#c084fc;
+      --red:#ef4444;
       --gradient:linear-gradient(135deg,#facc15,#c084fc,#ef4444);
     }
     *{box-sizing:border-box;}
@@ -25,285 +25,87 @@
       line-height:1.6;
       overflow-x:hidden;
     }
-    
-    /* Animated background particles */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(2px 2px at 20px 30px, rgba(250,204,21,0.3), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(192,132,252,0.4), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(239,68,68,0.3), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(250,204,21,0.4), transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(192,132,252,0.3), transparent);
-      background-repeat: repeat;
-      background-size: 200px 100px;
-      animation: sparkle 20s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-    
-    @keyframes sparkle {
-      0%, 100% { transform: translateX(0) translateY(0); }
-      25% { transform: translateX(-10px) translateY(-5px); }
-      50% { transform: translateX(10px) translateY(-10px); }
-      75% { transform: translateX(-5px) translateY(5px); }
-    }
-
     header{
       text-align:center;
       padding:32px 0;
-      animation:fadeInDown 1s ease-out;
     }
-    
     header img{
       width:96px;
       height:96px;
       margin-bottom:12px;
       border-radius:50%;
-      box-shadow:0 0 20px rgba(250,204,21,.7);
-      animation: logoFloat 3s ease-in-out infinite, logoPulse 2s ease-in-out infinite alternate;
-      transition: transform 0.3s ease;
+      box-shadow:0 0 30px rgba(250,204,21,.7);
     }
-    
-    header img:hover {
-      transform: scale(1.1) rotate(360deg);
-    }
-    
-    @keyframes logoFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    @keyframes logoPulse {
-      0% { box-shadow: 0 0 20px rgba(250,204,21,.7); }
-      100% { box-shadow: 0 0 30px rgba(250,204,21,1), 0 0 40px rgba(192,132,252,0.5); }
-    }
-
     .hero{
-      min-height:70vh;
+      min-height:50vh;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
       padding:40px 20px;
-      animation:fadeIn 1.5s ease-out;
-      position: relative;
     }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(250,204,21,0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: heroGlow 4s ease-in-out infinite;
-      z-index: -1;
-    }
-    
-    @keyframes heroGlow {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
-    }
-    
     .hero h1{
       font-size:3rem;
       background:var(--gradient);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
-      animation: textShimmer 3s ease-in-out infinite, bounceIn 1s ease-out;
     }
-    
-    @keyframes textShimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    
-    @keyframes bounceIn {
-      0% { transform: scale(0.3) translateY(-50px); opacity: 0; }
-      50% { transform: scale(1.05); }
-      70% { transform: scale(0.9); }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
-    }
-    
     .hero p{
       max-width:900px;
       color:#d1d5db;
       font-size:1.2rem;
       margin-top:1rem;
-      animation: slideInUp 1s ease-out 0.3s both;
     }
-    
-    @keyframes slideInUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    section{
-      padding:64px 20px;
-      position:relative;
-      animation: sectionFadeIn 0.8s ease-out;
-    }
-    
-    @keyframes sectionFadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
+    section{padding:64px 20px;}
     section h2{
       text-align:center;
       font-size:2rem;
       margin-bottom:24px;
-      animation: titleBounce 0.6s ease-out, titleGlow 2s ease-in-out infinite alternate;
+      color:var(--gold);
     }
-    
-    @keyframes titleBounce {
-      0% { transform: translateY(-20px); opacity: 0; }
-      60% { transform: translateY(5px); }
-      100% { transform: translateY(0); opacity: 1; }
+    .products .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:30px;
     }
-    
-    @keyframes titleGlow {
-      0% { text-shadow: 0 0 5px currentColor; }
-      100% { text-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
-    }
-
+    @media(min-width:992px){.products .grid{grid-template-columns:repeat(3,1fr);}}
     .card{
       background:var(--card);
-      padding:24px;
+      padding:28px;
       border-radius:18px;
       box-shadow:0 8px 25px rgba(0,0,0,0.6);
-      transition:transform 0.3s,box-shadow 0.3s, background 0.3s;
-      animation: cardSlideIn 0.6s ease-out;
-      position: relative;
-      overflow: hidden;
+      transition:transform 0.3s, box-shadow 0.3s;
     }
-    
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      transition: left 0.6s;
-    }
-    
-    .card:hover::before {
-      left: 100%;
-    }
-    
     .card:hover{
       transform:translateY(-6px) scale(1.02);
-      box-shadow:0 12px 30px rgba(0,0,0,0.75);
-      background: linear-gradient(135deg, var(--card), rgba(250,204,21,0.1));
+      box-shadow:0 12px 30px rgba(0,0,0,0.85);
     }
-    
-    @keyframes cardSlideIn {
-      from { transform: translateX(-30px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    .card h3{
+      font-size:1.5rem;
+      margin-bottom:12px;
+      color:var(--gold);
     }
-
-    .services .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:20px;
+    .card .price{
+      font-size:1.2rem;
+      font-weight:bold;
+      color:var(--purple);
+      margin-bottom:16px;
     }
-    
-    .services .card {
-      animation: cardSlideIn 0.6s ease-out;
-    }
-    
-    .services .card:nth-child(1) { animation-delay: 0.1s; }
-    .services .card:nth-child(2) { animation-delay: 0.2s; }
-    .services .card:nth-child(3) { animation-delay: 0.3s; }
-    
-    @media(min-width:768px){.services .grid{grid-template-columns:repeat(3,1fr);}}
-    
-    .services .card h3{
-      color:var(--accent-yellow);
-      margin-bottom:10px;
-      font-size:1.3rem;
-      animation: headingPulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes headingPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .gallery .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:20px;
-    }
-    
-    @media(min-width:768px){.gallery .grid{grid-template-columns:1fr 1fr;}}
-    
-    .gallery img{
-      width:100%;
-      border-radius:14px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.45);
-      transition:transform 0.4s ease, box-shadow 0.4s ease;
-      animation: imageFloat 4s ease-in-out infinite;
-    }
-    
-    .gallery img:nth-child(1) { animation-delay: 0s; }
-    .gallery img:nth-child(2) { animation-delay: 2s; }
-    
-    .gallery img:hover{
-      transform:scale(1.05) rotate(2deg);
-      box-shadow:0 15px 40px rgba(250,204,21,0.3);
-    }
-    
-    @keyframes imageFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .contact form{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    
+    .card p{color:#d1d5db;font-size:1rem;}
+    .contact form{display:flex;flex-direction:column;gap:14px;}
     .contact input,.contact textarea{
       padding:14px;
       border-radius:8px;
       border:2px solid transparent;
       background:var(--bg);
       color:#fff;
-      transition:border 0.3s, transform 0.3s, box-shadow 0.3s;
-      animation: inputSlideIn 0.5s ease-out;
     }
-    
-    .contact input:nth-child(1) { animation-delay: 0.1s; }
-    .contact input:nth-child(2) { animation-delay: 0.2s; }
-    .contact textarea { animation-delay: 0.3s; }
-    
-    @keyframes inputSlideIn {
-      from { transform: translateX(-20px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
     .contact input:focus,.contact textarea:focus{
       outline:none;
-      border:2px solid var(--accent-purple);
-      transform: scale(1.02);
-      box-shadow: 0 0 15px rgba(192,132,252,0.3);
+      border:2px solid var(--purple);
     }
-    
     .contact button{
       background:var(--gradient);
       color:#fff;
@@ -313,106 +115,15 @@
       cursor:pointer;
       font-size:1rem;
       font-weight:bold;
-      transition:opacity 0.3s, transform 0.3s;
-      animation: buttonBounce 0.6s ease-out 0.4s both, buttonPulse 2s ease-in-out 1s infinite;
-      position: relative;
-      overflow: hidden;
     }
-    
-    .contact button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255,255,255,0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s;
-    }
-    
-    .contact button:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-    
-    .contact button:hover{
-      opacity:0.85;
-      transform: scale(1.05);
-    }
-    
-    @keyframes buttonBounce {
-      0% { transform: scale(0) rotate(180deg); }
-      60% { transform: scale(1.1) rotate(-10deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    
-    @keyframes buttonPulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(250,204,21,0.3); }
-      50% { box-shadow: 0 0 20px rgba(250,204,21,0.6), 0 0 30px rgba(192,132,252,0.3); }
-    }
-
     footer{
       text-align:center;
       padding:40px 20px;
       color:var(--muted);
       font-size:0.95rem;
       line-height:1.8;
-      animation: footerSlideUp 0.8s ease-out;
     }
-    
-    @keyframes footerSlideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    
-    footer strong{
-      color:#fff;
-      animation: textSparkle 3s ease-in-out infinite;
-    }
-    
-    @keyframes textSparkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; text-shadow: 0 0 10px currentColor; }
-    }
-
-    /* Enhanced base animations */
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(20px) scale(0.95);}
-      to{opacity:1;transform:translateY(0) scale(1);}
-    }
-    
-    @keyframes fadeInDown{
-      from{opacity:0;transform:translateY(-30px) rotate(-5deg);}
-      to{opacity:1;transform:translateY(0) rotate(0deg);}
-    }
-    
-    /* Scroll-triggered animations */
-    @media (prefers-reduced-motion: no-preference) {
-      .card, .gallery img {
-        opacity: 0;
-        animation-fill-mode: forwards;
-      }
-      
-      .card:nth-child(odd) {
-        animation: slideInLeft 0.8s ease-out forwards;
-      }
-      
-      .card:nth-child(even) {
-        animation: slideInRight 0.8s ease-out forwards;
-      }
-      
-      @keyframes slideInLeft {
-        from { opacity: 0; transform: translateX(-50px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-      
-      @keyframes slideInRight {
-        from { opacity: 0; transform: translateX(50px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-    }
+    footer strong{color:#fff;}
   </style>
   <script>
     (function(){emailjs.init("broFVDMJTYWUdT84E");})(); 
@@ -425,69 +136,6 @@
         alert("Failed to send: "+JSON.stringify(error));
       });
     }
-    
-    // Add scroll animation triggers
-    window.addEventListener('scroll', () => {
-      const cards = document.querySelectorAll('.card');
-      const images = document.querySelectorAll('.gallery img');
-      
-      [...cards, ...images].forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.style.animationPlayState = 'running';
-          element.style.opacity = '1';
-        }
-      });
-    });
-    
-    // Add some interactive sparkle effects
-    document.addEventListener('DOMContentLoaded', () => {
-      const hero = document.querySelector('.hero');
-      
-      hero.addEventListener('mousemove', (e) => {
-        const sparkle = document.createElement('div');
-        sparkle.style.position = 'absolute';
-        sparkle.style.left = e.clientX - hero.offsetLeft + 'px';
-        sparkle.style.top = e.clientY - hero.offsetTop + 'px';
-        sparkle.style.width = '4px';
-        sparkle.style.height = '4px';
-        sparkle.style.background = '#facc15';
-        sparkle.style.borderRadius = '50%';
-        sparkle.style.pointerEvents = 'none';
-        sparkle.style.animation = 'sparkleDisappear 1s ease-out forwards';
-        
-        hero.appendChild(sparkle);
-        
-        setTimeout(() => {
-          sparkle.remove();
-        }, 1000);
-      });
-      
-      // Create sparkle disappear animation
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes sparkleDisappear {
-          0% { 
-            opacity: 1; 
-            transform: scale(0) rotate(0deg); 
-            box-shadow: 0 0 10px #facc15;
-          }
-          50% { 
-            opacity: 1; 
-            transform: scale(1) rotate(180deg); 
-            box-shadow: 0 0 20px #facc15;
-          }
-          100% { 
-            opacity: 0; 
-            transform: scale(0) rotate(360deg) translateY(-50px); 
-            box-shadow: 0 0 5px #facc15;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    });
   </script>
 </head>
 <body>
@@ -496,50 +144,52 @@
   </header>
   <section class="hero">
     <h1>Pixel Blade Technologies</h1>
-    <p>Tailor-made algorithmic strategies for HNI clients — blending technology and finance with precision, confidentiality, and a professional edge.</p>
+    <p>Exclusive algorithmic trading solutions engineered with precision and discretion for professional investors.</p>
   </section>
-  <section class="about">
-    <h2 style="color:var(--accent-purple);">About Us</h2>
-    <div class="card" style="margin-top:18px;text-align:center;color:#d1d5db;max-width:900px;margin-left:auto;margin-right:auto;">
-      Pixel Blade Technologies is dedicated to delivering bespoke algorithmic trading solutions for High Net Worth Individuals. Our mission is to combine advanced financial engineering with innovative technology to provide robust, adaptive, and confidential trading strategies.
-      <br/><br/>
-      We adhere to the highest standards of professionalism and integrity, ensuring each client's investment objectives and risk profile are at the center of every solution. With a disciplined approach to research and execution, we transform market complexities into actionable opportunities.
-      <br/><br/>
-      Our philosophy is simple: to empower clients through precision, reliability, and transparency, while maintaining the utmost confidentiality in every engagement.
-    </div>
-  </section>
-  <section class="services">
-    <h2 style="color:#f87171;">Our Services</h2>
+  <section class="products">
+    <h2>Our Algorithms</h2>
     <div class="grid">
       <div class="card">
-        <h3>Custom Algorithm Strategies</h3>
-        <p>We develop exclusive trading algorithms tailored to each client's objectives, market preferences, and investment horizons. Our strategies adapt dynamically to changing market conditions, ensuring consistent performance and long-term value creation.</p>
+        <h3>Henry — Pro Scalper</h3>
+        <div class="price">$1,000</div>
+        <p>
+          Henry is engineered for high-frequency market participation on the lower timeframes. 
+          Utilizing microstructure-aware execution logic and adaptive spread filters, Henry 
+          excels in extracting value from rapid bid-ask imbalances. Designed for liquidity-rich 
+          pairs, it includes safeguards for slippage and spread widening during volatile events.
+        </p>
       </div>
       <div class="card">
-        <h3>Tailored Risk Management</h3>
-        <p>Our risk management frameworks are individually designed to align with client profiles. We implement controls that safeguard capital, optimize position sizing, and mitigate market volatility, ensuring portfolios remain resilient under diverse conditions.</p>
+        <h3>Jack — Intraday Momentum</h3>
+        <div class="price">$10,000</div>
+        <p>
+          Jack is a systematic intraday engine that identifies and exploits directional momentum 
+          through multi-timeframe signal confirmation. It integrates volatility-adjusted position 
+          sizing and dynamic stop adaptation, ensuring robustness across varying market regimes. 
+          Jack is ideal for institutional-style intraday execution with tight risk controls.
+        </p>
       </div>
       <div class="card">
-        <h3>Exclusive Client Insights</h3>
-        <p>Clients receive privileged access to private reports and proprietary market insights. These insights are delivered with discretion and clarity, enabling clients to make informed decisions with confidence and precision.</p>
+        <h3>Gordon — Swing & Positional</h3>
+        <div class="price">$100,000</div>
+        <p>
+          Gordon is a long-horizon model designed for swing and positional strategies. Built 
+          on advanced statistical learning frameworks, it incorporates macro trend analysis, 
+          intermarket confirmation, and capital allocation modules. Gordon emphasizes portfolio 
+          stability and drawdown minimization, making it suited for high-net-worth allocations 
+          and wealth preservation mandates.
+        </p>
       </div>
-    </div>
-  </section>
-  <section class="gallery">
-    <h2 style="color:var(--accent-yellow);">Trading Insights</h2>
-    <div class="grid">
-      <img src="US30.png" alt="Trading Chart 1"/>
-      <img src="XAUUSD.png" alt="Trading Chart 2"/>
     </div>
   </section>
   <section class="contact">
-    <h2 style="color:var(--accent-purple);">Contact Us</h2>
+    <h2>Contact Us</h2>
     <div class="card" style="margin-top:18px;max-width:600px;margin-left:auto;margin-right:auto;">
       <form onsubmit="sendEmail(event)">
         <input type="text" name="from_name" placeholder="Your Name" required/>
         <input type="email" name="reply_to" placeholder="Your Email" required/>
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+        <button type="submit">Send Inquiry</button>
       </form>
     </div>
   </section>
