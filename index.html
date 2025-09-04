@@ -20,10 +20,7 @@
       --glow-purple:0 0 30px rgba(192,132,252,.3);
     }
     *{box-sizing:border-box;}
-    
-    /* Smooth scrolling */
     html{scroll-behavior:smooth;}
-    
     body{
       margin:0;
       font-family:'Segoe UI',Arial,sans-serif;
@@ -33,8 +30,6 @@
       overflow-x:hidden;
       position:relative;
     }
-    
-    /* Animated background particles */
     body::before {
       content: '';
       position: fixed;
@@ -48,14 +43,11 @@
       z-index: -1;
       animation: float 20s ease-in-out infinite;
     }
-    
     @keyframes float {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       33% { transform: translateY(-10px) rotate(1deg); }
       66% { transform: translateY(5px) rotate(-1deg); }
     }
-    
-    /* Navigation */
     nav {
       position: fixed;
       top: 20px;
@@ -64,7 +56,6 @@
       display: flex;
       gap: 10px;
     }
-    
     nav a {
       padding: 8px 16px;
       background: rgba(26,26,26,0.8);
@@ -76,19 +67,16 @@
       transition: all 0.3s;
       border: 1px solid transparent;
     }
-    
     nav a:hover {
       background: rgba(250,204,21,0.1);
       border-color: var(--gold);
       box-shadow: var(--glow-gold);
     }
-    
     header{
       text-align:center;
       padding:40px 0;
       position: relative;
     }
-    
     header img{
       width:120px;
       height:120px;
@@ -98,12 +86,10 @@
       transition: all 0.3s ease;
       border: 3px solid rgba(250,204,21,.2);
     }
-    
     header img:hover {
       transform: scale(1.05) rotate(5deg);
       box-shadow: 0 0 60px rgba(250,204,21,.8);
     }
-    
     .hero{
       min-height:60vh;
       display:flex;
@@ -114,7 +100,6 @@
       padding:60px 20px;
       position: relative;
     }
-    
     .hero::before {
       content: '';
       position: absolute;
@@ -127,7 +112,6 @@
       margin: 20px;
       opacity: 0.1;
     }
-    
     .hero h1{
       font-size:clamp(2rem, 5vw, 4rem);
       background:var(--gradient);
@@ -139,12 +123,10 @@
       position: relative;
       z-index: 1;
     }
-    
     @keyframes glow {
       from { filter: drop-shadow(0 0 5px rgba(250,204,21,.3)); }
       to { filter: drop-shadow(0 0 20px rgba(250,204,21,.6)); }
     }
-    
     .hero p{
       max-width:900px;
       color:#d1d5db;
@@ -155,13 +137,10 @@
       position: relative;
       z-index: 1;
     }
-    
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
-    /* Stats section */
     .stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -171,7 +150,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-    
     .stat {
       text-align: center;
       padding: 20px;
@@ -181,13 +159,11 @@
       border: 1px solid rgba(250,204,21,0.1);
       transition: all 0.3s;
     }
-    
     .stat:hover {
       transform: translateY(-5px);
       box-shadow: var(--glow-gold);
       border-color: var(--gold);
     }
-    
     .stat-number {
       font-size: 2rem;
       font-weight: bold;
@@ -196,15 +172,12 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
     .stat-label {
       color: var(--muted);
       font-size: 0.9rem;
       margin-top: 5px;
     }
-    
     section{padding:80px 20px;}
-    
     section h2{
       text-align:center;
       font-size:2.5rem;
@@ -212,7 +185,6 @@
       color:var(--gold);
       position: relative;
     }
-    
     section h2::after {
       content: '';
       position: absolute;
@@ -224,7 +196,6 @@
       background: var(--gradient);
       border-radius: 2px;
     }
-    
     .products .grid{
       display:grid;
       grid-template-columns:1fr;
@@ -232,11 +203,9 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    
     @media(min-width:992px){
       .products .grid{grid-template-columns:repeat(3,1fr);}
     }
-    
     .card{
       background:var(--card);
       padding:35px;
@@ -247,7 +216,6 @@
       border: 1px solid rgba(250,204,21,0.1);
       overflow: hidden;
     }
-    
     .card::before {
       content: '';
       position: absolute;
@@ -258,17 +226,12 @@
       background: linear-gradient(90deg, transparent, rgba(250,204,21,0.1), transparent);
       transition: left 0.6s;
     }
-    
-    .card:hover::before {
-      left: 100%;
-    }
-    
+    .card:hover::before { left: 100%; }
     .card:hover{
       transform:translateY(-10px) scale(1.03);
       box-shadow:0 20px 40px rgba(0,0,0,0.8), var(--glow-gold);
       border-color: var(--gold);
     }
-    
     .card h3{
       font-size:1.8rem;
       margin-bottom:15px;
@@ -277,7 +240,6 @@
       align-items: center;
       gap: 10px;
     }
-    
     .card h3::before {
       content: '';
       width: 8px;
@@ -286,7 +248,6 @@
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(250,204,21,0.5);
     }
-    
     .card .price{
       font-size:1.4rem;
       font-weight:bold;
@@ -294,20 +255,12 @@
       margin-bottom:20px;
       text-shadow: 0 0 10px rgba(192,132,252,0.3);
     }
-    
-    .card p{
-      color:#d1d5db;
-      font-size:1.1rem;
-      line-height: 1.7;
-    }
-    
-    /* Features list for each algorithm */
+    .card p{color:#d1d5db;font-size:1.1rem;line-height: 1.7;}
     .features {
       margin-top: 20px;
       padding-top: 20px;
       border-top: 1px solid rgba(250,204,21,0.2);
     }
-    
     .feature {
       display: flex;
       align-items: center;
@@ -315,14 +268,30 @@
       font-size: 0.95rem;
       color: var(--muted);
     }
-    
     .feature::before {
       content: '✓';
       color: var(--gold);
       font-weight: bold;
       margin-right: 8px;
     }
-    
+    .full-width-card {
+      grid-column: 1 / -1;
+    }
+    .recommended-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--gradient);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 10px rgba(250,204,21,0.3);
+      z-index: 2;
+    }
     .contact form{
       display:flex;
       flex-direction:column;
@@ -330,7 +299,6 @@
       max-width: 600px;
       margin: 0 auto;
     }
-    
     .contact input,.contact textarea{
       padding:18px;
       border-radius:12px;
@@ -340,14 +308,12 @@
       font-size: 1rem;
       transition: all 0.3s;
     }
-    
     .contact input:focus,.contact textarea:focus{
       outline:none;
       border:2px solid var(--gold);
       box-shadow: var(--glow-gold);
       transform: translateY(-2px);
     }
-    
     .contact button{
       background:var(--gradient);
       color:#fff;
@@ -361,17 +327,11 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    
     .contact button:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(250,204,21,0.3);
     }
-    
-    .contact button:active {
-      transform: translateY(-1px);
-    }
-    
-    /* Success message styling */
+    .contact button:active { transform: translateY(-1px); }
     .success-message {
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
@@ -382,12 +342,10 @@
       display: none;
       animation: slideIn 0.3s ease-out;
     }
-    
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
     footer{
       text-align:center;
       padding:60px 20px;
@@ -398,68 +356,36 @@
       backdrop-filter: blur(10px);
       border-top: 1px solid rgba(250,204,21,0.1);
     }
-    
     footer strong{color:#fff;}
-    
-    /* Responsive improvements */
     @media (max-width: 768px) {
-      nav {
-        top: 10px;
-        right: 10px;
-        flex-direction: column;
-      }
-      
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .card {
-        padding: 25px;
-      }
-      
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin: 30px 15px;
-      }
+      nav {top: 10px;right: 10px;flex-direction: column;}
+      .hero h1 {font-size: 2.5rem;}
+      .card {padding: 25px;}
+      .stats {grid-template-columns: repeat(2, 1fr);gap: 15px;margin: 30px 15px;}
     }
-    
-    /* Scroll animations */
     @keyframes slideInFromLeft {
       from { opacity: 0; transform: translateX(-50px); }
       to { opacity: 1; transform: translateX(0); }
     }
-    
     @keyframes slideInFromRight {
       from { opacity: 0; transform: translateX(50px); }
       to { opacity: 1; transform: translateX(0); }
     }
-    
-    .animate-in {
-      opacity: 0;
-      animation: slideInFromLeft 0.8s ease-out forwards;
-    }
-    
-    .animate-in:nth-child(even) {
-      animation-name: slideInFromRight;
-    }
+    .animate-in {opacity: 0;animation: slideInFromLeft 0.8s ease-out forwards;}
+    .animate-in:nth-child(even) {animation-name: slideInFromRight;}
   </style>
   <script>
     (function(){emailjs.init("broFVDMJTYWUdT84E");})(); 
-    
     function sendEmail(e){
       e.preventDefault();
       const button = e.target.querySelector('button');
       const originalText = button.textContent;
-      
       button.textContent = 'Sending...';
       button.disabled = true;
-      
       emailjs.sendForm("service_ivzfwta","template_wl0csao", e.target).then(function(){
         button.textContent = 'Message Sent!';
         button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
         e.target.reset();
-        
         setTimeout(() => {
           button.textContent = originalText;
           button.disabled = false;
@@ -471,24 +397,16 @@
         console.error('EmailJS error:', error);
       });
     }
-    
-    // Scroll animations
     function animateOnScroll() {
       const cards = document.querySelectorAll('.card');
       const stats = document.querySelectorAll('.stat');
-      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-          }
+          if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
         });
       }, { threshold: 0.1 });
-      
       [...cards, ...stats].forEach(el => observer.observe(el));
     }
-    
-    // Smooth scroll for navigation
     function setupSmoothScroll() {
       document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -498,8 +416,6 @@
         });
       });
     }
-    
-    // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
       animateOnScroll();
       setupSmoothScroll();
@@ -511,19 +427,16 @@
     <a href="#algorithms">Algorithms</a>
     <a href="#contact">Contact</a>
   </nav>
-
   <header>
     <img src="logo.png" alt="Pixel Blade Logo"/>
   </header>
-
   <section class="hero">
     <h1>Pixel Blade Technologies</h1>
     <p>Exclusive algorithmic trading solutions engineered with precision and discretion for professional investors.</p>
   </section>
-
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">3</div>
+      <div class="stat-number">4</div>
       <div class="stat-label">Elite Algorithms</div>
     </div>
     <div class="stat">
@@ -535,19 +448,31 @@
       <div class="stat-label">Institutional Grade</div>
     </div>
   </div>
-
   <section class="products" id="algorithms">
     <h2>Our Algorithms</h2>
     <div class="grid">
+      <div class="card full-width-card">
+        <div class="recommended-tag">Recommended</div>
+        <h3>Kiwi — Safe & Slow</h3>
+        <div class="price">$100</div>
+        <p>Kiwi is designed for steady and cautious growth, prioritizing safety 
+          and long-term consistency over speed. Its conservative execution logic 
+          and robust protective filters make it ideal for traders who value 
+          capital preservation while still participating in the markets.</p>
+        <div class="features">
+          <div class="feature">Ultra-conservative execution logic</div>
+          <div class="feature">Strong protective risk filters</div>
+          <div class="feature">Capital preservation focused</div>
+          <div class="feature">Long-term steady performance</div>
+        </div>
+      </div>
       <div class="card">
         <h3>Henry — Pro Scalper</h3>
         <div class="price">$1,000</div>
-        <p>
-          Henry is engineered for high-frequency market participation on the lower timeframes. 
+        <p>Henry is engineered for high-frequency market participation on the lower timeframes. 
           Utilizing microstructure-aware execution logic and adaptive spread filters, Henry 
           excels in extracting value from rapid bid-ask imbalances. Designed for liquidity-rich 
-          pairs, it includes safeguards for slippage and spread widening during volatile events.
-        </p>
+          pairs, it includes safeguards for slippage and spread widening during volatile events.</p>
         <div class="features">
           <div class="feature">High-frequency execution engine</div>
           <div class="feature">Adaptive spread filtering</div>
@@ -558,12 +483,10 @@
       <div class="card">
         <h3>Jack — Intraday Momentum</h3>
         <div class="price">$10,000</div>
-        <p>
-          Jack is a systematic intraday engine that identifies and exploits directional momentum 
+        <p>Jack is a systematic intraday engine that identifies and exploits directional momentum 
           through multi-timeframe signal confirmation. It integrates volatility-adjusted position 
           sizing and dynamic stop adaptation, ensuring robustness across varying market regimes. 
-          Jack is ideal for institutional-style intraday execution with tight risk controls.
-        </p>
+          Jack is ideal for institutional-style intraday execution with tight risk controls.</p>
         <div class="features">
           <div class="feature">Multi-timeframe signal confirmation</div>
           <div class="feature">Volatility-adjusted position sizing</div>
@@ -574,13 +497,11 @@
       <div class="card">
         <h3>Gordon — Swing & Positional</h3>
         <div class="price">$100,000</div>
-        <p>
-          Gordon is a long-horizon model designed for swing and positional strategies. Built 
+        <p>Gordon is a long-horizon model designed for swing and positional strategies. Built 
           on advanced statistical learning frameworks, it incorporates macro trend analysis, 
           intermarket confirmation, and capital allocation modules. Gordon emphasizes portfolio 
           stability and drawdown minimization, making it suited for high-net-worth allocations 
-          and wealth preservation mandates.
-        </p>
+          and wealth preservation mandates.</p>
         <div class="features">
           <div class="feature">Advanced statistical learning</div>
           <div class="feature">Macro trend analysis integration</div>
@@ -590,7 +511,6 @@
       </div>
     </div>
   </section>
-
   <section class="contact" id="contact">
     <h2>Contact Us</h2>
     <div class="card" style="margin-top:30px;">
@@ -602,7 +522,6 @@
       </form>
     </div>
   </section>
-
   <footer>
     <p>© <script>document.write(new Date().getFullYear())</script> Pixel Blade Technologies. All Rights Reserved.</p>
     <p><strong>Address:</strong> S/O Satyapal Singh, Harchandpur, Bijnor, Uttar Pradesh - 246732</p>
