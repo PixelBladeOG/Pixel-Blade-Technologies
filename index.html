@@ -8,15 +8,22 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
   <style>
     :root{
-      --bg:#0f0f0f;
+      --bg:#0a0a0a;
       --card:#1a1a1a;
       --muted:#9ca3af;
       --gold:#facc15;
       --purple:#c084fc;
       --red:#ef4444;
       --gradient:linear-gradient(135deg,#facc15,#c084fc,#ef4444);
+      --gradient-subtle:linear-gradient(135deg,#facc1510,#c084fc10,#ef444410);
+      --glow-gold:0 0 30px rgba(250,204,21,.3);
+      --glow-purple:0 0 30px rgba(192,132,252,.3);
     }
     *{box-sizing:border-box;}
+    
+    /* Smooth scrolling */
+    html{scroll-behavior:smooth;}
+    
     body{
       margin:0;
       font-family:'Segoe UI',Arial,sans-serif;
@@ -24,129 +31,512 @@
       color:white;
       line-height:1.6;
       overflow-x:hidden;
+      position:relative;
     }
+    
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 25% 25%, #facc1505 0%, transparent 50%),
+                  radial-gradient(circle at 75% 75%, #c084fc05 0%, transparent 50%),
+                  radial-gradient(circle at 50% 50%, #ef444405 0%, transparent 50%);
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-10px) rotate(1deg); }
+      66% { transform: translateY(5px) rotate(-1deg); }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+    
+    nav a {
+      padding: 8px 16px;
+      background: rgba(26,26,26,0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--gold);
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+    
+    nav a:hover {
+      background: rgba(250,204,21,0.1);
+      border-color: var(--gold);
+      box-shadow: var(--glow-gold);
+    }
+    
     header{
       text-align:center;
-      padding:32px 0;
+      padding:40px 0;
+      position: relative;
     }
+    
     header img{
-      width:96px;
-      height:96px;
-      margin-bottom:12px;
+      width:120px;
+      height:120px;
+      margin-bottom:20px;
       border-radius:50%;
-      box-shadow:0 0 30px rgba(250,204,21,.7);
+      box-shadow:0 0 40px rgba(250,204,21,.6);
+      transition: all 0.3s ease;
+      border: 3px solid rgba(250,204,21,.2);
     }
+    
+    header img:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 0 60px rgba(250,204,21,.8);
+    }
+    
     .hero{
-      min-height:50vh;
+      min-height:60vh;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:40px 20px;
+      padding:60px 20px;
+      position: relative;
     }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-subtle);
+      border-radius: 50px;
+      margin: 20px;
+      opacity: 0.1;
+    }
+    
     .hero h1{
-      font-size:3rem;
+      font-size:clamp(2rem, 5vw, 4rem);
       background:var(--gradient);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
+      margin-bottom: 20px;
+      animation: glow 3s ease-in-out infinite alternate;
+      position: relative;
+      z-index: 1;
     }
+    
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(250,204,21,.3)); }
+      to { filter: drop-shadow(0 0 20px rgba(250,204,21,.6)); }
+    }
+    
     .hero p{
       max-width:900px;
       color:#d1d5db;
-      font-size:1.2rem;
+      font-size:1.3rem;
       margin-top:1rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+      position: relative;
+      z-index: 1;
     }
-    section{padding:64px 20px;}
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Stats section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 40px 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 20px;
+      background: rgba(26,26,26,0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(250,204,21,0.1);
+      transition: all 0.3s;
+    }
+    
+    .stat:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--glow-gold);
+      border-color: var(--gold);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    
+    section{padding:80px 20px;}
+    
     section h2{
       text-align:center;
-      font-size:2rem;
-      margin-bottom:24px;
+      font-size:2.5rem;
+      margin-bottom:40px;
       color:var(--gold);
+      position: relative;
     }
+    
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+    
     .products .grid{
       display:grid;
       grid-template-columns:1fr;
-      gap:30px;
+      gap:40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    @media(min-width:992px){.products .grid{grid-template-columns:repeat(3,1fr);}}
+    
+    @media(min-width:992px){
+      .products .grid{grid-template-columns:repeat(3,1fr);}
+    }
+    
     .card{
       background:var(--card);
-      padding:28px;
-      border-radius:18px;
-      box-shadow:0 8px 25px rgba(0,0,0,0.6);
-      transition:transform 0.3s, box-shadow 0.3s;
+      padding:35px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      transition:all 0.4s ease;
+      position: relative;
+      border: 1px solid rgba(250,204,21,0.1);
+      overflow: hidden;
     }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(250,204,21,0.1), transparent);
+      transition: left 0.6s;
+    }
+    
+    .card:hover::before {
+      left: 100%;
+    }
+    
     .card:hover{
-      transform:translateY(-6px) scale(1.02);
-      box-shadow:0 12px 30px rgba(0,0,0,0.85);
+      transform:translateY(-10px) scale(1.03);
+      box-shadow:0 20px 40px rgba(0,0,0,0.8), var(--glow-gold);
+      border-color: var(--gold);
     }
+    
     .card h3{
-      font-size:1.5rem;
-      margin-bottom:12px;
+      font-size:1.8rem;
+      margin-bottom:15px;
       color:var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    
+    .card h3::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--gradient);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(250,204,21,0.5);
+    }
+    
     .card .price{
-      font-size:1.2rem;
+      font-size:1.4rem;
       font-weight:bold;
       color:var(--purple);
-      margin-bottom:16px;
+      margin-bottom:20px;
+      text-shadow: 0 0 10px rgba(192,132,252,0.3);
     }
-    .card p{color:#d1d5db;font-size:1rem;}
-    .contact form{display:flex;flex-direction:column;gap:14px;}
+    
+    .card p{
+      color:#d1d5db;
+      font-size:1.1rem;
+      line-height: 1.7;
+    }
+    
+    /* Features list for each algorithm */
+    .features {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(250,204,21,0.2);
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    
+    .feature::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    
+    .contact form{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
     .contact input,.contact textarea{
-      padding:14px;
-      border-radius:8px;
-      border:2px solid transparent;
+      padding:18px;
+      border-radius:12px;
+      border:2px solid rgba(250,204,21,0.2);
       background:var(--bg);
       color:#fff;
+      font-size: 1rem;
+      transition: all 0.3s;
     }
+    
     .contact input:focus,.contact textarea:focus{
       outline:none;
-      border:2px solid var(--purple);
+      border:2px solid var(--gold);
+      box-shadow: var(--glow-gold);
+      transform: translateY(-2px);
     }
+    
     .contact button{
       background:var(--gradient);
       color:#fff;
-      padding:14px;
+      padding:18px;
       border:none;
-      border-radius:8px;
+      border-radius:12px;
       cursor:pointer;
-      font-size:1rem;
+      font-size:1.1rem;
       font-weight:bold;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+    
+    .contact button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(250,204,21,0.3);
+    }
+    
+    .contact button:active {
+      transform: translateY(-1px);
+    }
+    
+    /* Success message styling */
+    .success-message {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     footer{
       text-align:center;
-      padding:40px 20px;
+      padding:60px 20px;
       color:var(--muted);
-      font-size:0.95rem;
-      line-height:1.8;
+      font-size:1rem;
+      line-height:2;
+      background: rgba(26,26,26,0.5);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(250,204,21,0.1);
     }
+    
     footer strong{color:#fff;}
+    
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+      nav {
+        top: 10px;
+        right: 10px;
+        flex-direction: column;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .card {
+        padding: 25px;
+      }
+      
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin: 30px 15px;
+      }
+    }
+    
+    /* Scroll animations */
+    @keyframes slideInFromLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes slideInFromRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    .animate-in {
+      opacity: 0;
+      animation: slideInFromLeft 0.8s ease-out forwards;
+    }
+    
+    .animate-in:nth-child(even) {
+      animation-name: slideInFromRight;
+    }
   </style>
   <script>
     (function(){emailjs.init("broFVDMJTYWUdT84E");})(); 
+    
     function sendEmail(e){
       e.preventDefault();
+      const button = e.target.querySelector('button');
+      const originalText = button.textContent;
+      
+      button.textContent = 'Sending...';
+      button.disabled = true;
+      
       emailjs.sendForm("service_ivzfwta","template_wl0csao", e.target).then(function(){
-        alert("Your message has been sent!");
+        button.textContent = 'Message Sent!';
+        button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
         e.target.reset();
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+          button.style.background = 'var(--gradient)';
+        }, 3000);
       }, function(error){
-        alert("Failed to send: "+JSON.stringify(error));
+        button.textContent = 'Failed - Try Again';
+        button.disabled = false;
+        console.error('EmailJS error:', error);
       });
     }
+    
+    // Scroll animations
+    function animateOnScroll() {
+      const cards = document.querySelectorAll('.card');
+      const stats = document.querySelectorAll('.stat');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      [...cards, ...stats].forEach(el => observer.observe(el));
+    }
+    
+    // Smooth scroll for navigation
+    function setupSmoothScroll() {
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          target.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      animateOnScroll();
+      setupSmoothScroll();
+    });
   </script>
 </head>
 <body>
+  <nav>
+    <a href="#algorithms">Algorithms</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <header>
     <img src="logo.png" alt="Pixel Blade Logo"/>
   </header>
+
   <section class="hero">
     <h1>Pixel Blade Technologies</h1>
     <p>Exclusive algorithmic trading solutions engineered with precision and discretion for professional investors.</p>
   </section>
-  <section class="products">
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Elite Algorithms</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Market Monitoring</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">Pro</div>
+      <div class="stat-label">Institutional Grade</div>
+    </div>
+  </div>
+
+  <section class="products" id="algorithms">
     <h2>Our Algorithms</h2>
     <div class="grid">
       <div class="card">
@@ -158,6 +548,12 @@
           excels in extracting value from rapid bid-ask imbalances. Designed for liquidity-rich 
           pairs, it includes safeguards for slippage and spread widening during volatile events.
         </p>
+        <div class="features">
+          <div class="feature">High-frequency execution engine</div>
+          <div class="feature">Adaptive spread filtering</div>
+          <div class="feature">Slippage protection systems</div>
+          <div class="feature">Lower timeframe optimization</div>
+        </div>
       </div>
       <div class="card">
         <h3>Jack — Intraday Momentum</h3>
@@ -168,6 +564,12 @@
           sizing and dynamic stop adaptation, ensuring robustness across varying market regimes. 
           Jack is ideal for institutional-style intraday execution with tight risk controls.
         </p>
+        <div class="features">
+          <div class="feature">Multi-timeframe signal confirmation</div>
+          <div class="feature">Volatility-adjusted position sizing</div>
+          <div class="feature">Dynamic stop-loss adaptation</div>
+          <div class="feature">Institutional-grade risk controls</div>
+        </div>
       </div>
       <div class="card">
         <h3>Gordon — Swing & Positional</h3>
@@ -179,20 +581,28 @@
           stability and drawdown minimization, making it suited for high-net-worth allocations 
           and wealth preservation mandates.
         </p>
+        <div class="features">
+          <div class="feature">Advanced statistical learning</div>
+          <div class="feature">Macro trend analysis integration</div>
+          <div class="feature">Portfolio drawdown minimization</div>
+          <div class="feature">Wealth preservation focused</div>
+        </div>
       </div>
     </div>
   </section>
-  <section class="contact">
+
+  <section class="contact" id="contact">
     <h2>Contact Us</h2>
-    <div class="card" style="margin-top:18px;max-width:600px;margin-left:auto;margin-right:auto;">
+    <div class="card" style="margin-top:30px;">
       <form onsubmit="sendEmail(event)">
         <input type="text" name="from_name" placeholder="Your Name" required/>
         <input type="email" name="reply_to" placeholder="Your Email" required/>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
         <button type="submit">Send Inquiry</button>
       </form>
     </div>
   </section>
+
   <footer>
     <p>© <script>document.write(new Date().getFullYear())</script> Pixel Blade Technologies. All Rights Reserved.</p>
     <p><strong>Address:</strong> S/O Satyapal Singh, Harchandpur, Bijnor, Uttar Pradesh - 246732</p>
