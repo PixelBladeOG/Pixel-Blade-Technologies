@@ -177,6 +177,44 @@
       font-size: 0.9rem;
       margin-top: 5px;
     }
+    .ecosystem-badge {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .badge-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px;
+      background: rgba(26,26,26,0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(250,204,21,0.2);
+      transition: all 0.4s ease;
+    }
+    .badge-container:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--glow-gold);
+      border-color: var(--gold);
+    }
+    .badge-text {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+    .badge-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .badge-logo svg {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      filter: drop-shadow(0 2px 8px rgba(255,87,34,0.3));
+    }
     section{padding:80px 20px;}
     section h2{
       text-align:center;
@@ -332,20 +370,6 @@
       box-shadow: 0 10px 25px rgba(250,204,21,0.3);
     }
     .contact button:active { transform: translateY(-1px); }
-    .success-message {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-      text-align: center;
-      display: none;
-      animation: slideIn 0.3s ease-out;
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
     footer{
       text-align:center;
       padding:60px 20px;
@@ -362,6 +386,9 @@
       .hero h1 {font-size: 2.5rem;}
       .card {padding: 25px;}
       .stats {grid-template-columns: repeat(2, 1fr);gap: 15px;margin: 30px 15px;}
+      .badge-container {padding: 30px 20px;}
+      .badge-logo svg {max-width: 100%;}
+      .badge-text {font-size: 0.9rem;}
     }
     @keyframes slideInFromLeft {
       from { opacity: 0; transform: translateX(-50px); }
@@ -400,12 +427,13 @@
     function animateOnScroll() {
       const cards = document.querySelectorAll('.card');
       const stats = document.querySelectorAll('.stat');
+      const badge = document.querySelector('.badge-container');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
         });
       }, { threshold: 0.1 });
-      [...cards, ...stats].forEach(el => observer.observe(el));
+      [...cards, ...stats, badge].forEach(el => observer.observe(el));
     }
     function setupSmoothScroll() {
       document.querySelectorAll('nav a').forEach(link => {
@@ -448,6 +476,17 @@
       <div class="stat-label">Institutional Grade</div>
     </div>
   </div>
+  <section class="ecosystem-badge">
+    <div class="badge-container">
+      <p class="badge-text">Built for NinjaTrader Platform</p>
+      <div class="badge-logo">
+        <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="70" font-family="Arial, sans-serif" font-weight="bold" font-size="62" fill="#FF5722">NINJATRADER</text>
+          <text x="310" y="70" font-family="Arial, sans-serif" font-weight="300" font-size="38" fill="#333333">ECOSYSTEM</text>
+        </svg>
+      </div>
+    </div>
+  </section>
   <section class="products" id="algorithms">
     <h2>Our Algorithms</h2>
     <div class="grid">
