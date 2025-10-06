@@ -181,6 +181,10 @@
       padding: 60px 20px;
       text-align: center;
     }
+    .badge-link {
+      text-decoration: none;
+      display: block;
+    }
     .badge-container {
       max-width: 700px;
       margin: 0 auto;
@@ -190,6 +194,7 @@
       border-radius: 20px;
       border: 1px solid rgba(250,204,21,0.2);
       transition: all 0.4s ease;
+      cursor: pointer;
     }
     .badge-container:hover {
       transform: translateY(-5px);
@@ -477,15 +482,17 @@
     </div>
   </div>
   <section class="ecosystem-badge">
-    <div class="badge-container">
-      <p class="badge-text">Built for NinjaTrader Platform</p>
-      <div class="badge-logo">
-        <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
-          <text x="10" y="70" font-family="Arial, sans-serif" font-weight="bold" font-size="62" fill="#FF5722">NINJATRADER</text>
-          <text x="310" y="70" font-family="Arial, sans-serif" font-weight="300" font-size="38" fill="#333333">ECOSYSTEM</text>
-        </svg>
+    <a href="https://account.ninjatrader.com/register?introducingPartner=PixelBlade" target="_blank" rel="noopener noreferrer" class="badge-link">
+      <div class="badge-container">
+        <p class="badge-text">Built for NinjaTrader Platform</p>
+        <div class="badge-logo">
+          <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="70" font-family="Arial, sans-serif" font-weight="bold" font-size="62" fill="#FF5722">NINJATRADER</text>
+            <text x="310" y="70" font-family="Arial, sans-serif" font-weight="300" font-size="38" fill="#333333">ECOSYSTEM</text>
+          </svg>
+        </div>
       </div>
-    </div>
+    </a>
   </section>
   <section class="products" id="algorithms">
     <h2>Our Algorithms</h2>
